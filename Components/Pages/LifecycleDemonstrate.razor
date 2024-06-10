@@ -1,10 +1,13 @@
 ﻿@page "/demonstrate"
-@using Component.Lifecycle.Services
-@using Components.Lifecycle.Subcomponents
+@using ComponentLifecycle.Services
+@using BlazorApp8LifeCycleExample.SubComponents
+@inject LoggingService LoggingService   
+@implements IDisposable
+@rendermode InteractiveServer
 
 <div>
     <div> 
-        <button @onclick="()=>ShowComponent = !ShowComponent">Toggle Sample Component</button>
+        <button @onclick="()=>ToggleComponent()">Toggle Sample Component</button>
     </div>
     <div>
         @if (ShowComponent)
@@ -15,10 +18,10 @@
 </div>
 
 
-@foreach (var log in LoggingService.Log)
+@foreach (var log in LoggingService.Logs)
 {
     <p><strong>@log </strong> called</p>
-})
+}
 
 @code {
     protected override void OnInitialized() 
@@ -33,6 +36,10 @@
     {
         InvokeAsync(StateHasChanged);
     }
-    public bool ShowComponent { get; set; }
+    public bool ShowComponent { get; set; } 
+    private void ToggleComponent()
+    {
+        ShowComponent = !ShowComponent;
+    }
 }
 
