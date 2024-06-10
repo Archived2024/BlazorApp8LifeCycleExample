@@ -2,6 +2,18 @@
 @using Component.Lifecycle.Services
 @using Components.Lifecycle.Subcomponents
 
+<div>
+    <div> 
+        <button @onclick="()=>ShowComponent = !ShowComponent">Toggle Sample Component</button>
+    </div>
+    <div>
+        @if (ShowComponent)
+        {
+            <SampleComponent />
+        }
+    </div>
+</div>
+
 
 @foreach (var log in LoggingService.Log)
 {
