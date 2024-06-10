@@ -3,11 +3,24 @@
 @using Components.Lifecycle.Subcomponents
 
 
-@foreach (var log in LoggingServiceCollectionExtensions.Log)
+@foreach (var log in LoggingService.Log)
 {
     <p><strong>@log </strong> called</p>
 })
 
 @code {
-
+    protected override void OnInitialized() 
+    {
+        LoggingService.Logs.CollectionChanged +=RefreshPage;
+    }
+    public void Dispose()
+    {
+        LoggingService.Logs.CollectionChanged -= RefreshPage;
+    }
+    private void RefreshPage(object sender,EventArgs args)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+    public bool ShowComponent { get; set; }
 }
+
