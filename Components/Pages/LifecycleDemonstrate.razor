@@ -1,0 +1,13 @@
+﻿@page "/demonstrate"
+@using Component.Lifecycle.Services
+@using Components.Lifecycle.Subcomponents
+
+
+@foreach (var log in LoggingServiceCollectionExtensions.Log)
+{
+    <p><strong>@log </strong> called</p>
+})
+
+@code {
+
+}
