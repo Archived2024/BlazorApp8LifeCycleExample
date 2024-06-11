@@ -14,7 +14,7 @@
     [Parameter]
     public string ComponentParameter { get; set; } = "";
 
-    protected override void OnParameterSet()
+    protected override void OnParametersSet()
     {
         JSRuntime.InvokeVoidAsync("alert", "Nu triggas ParameterSet fasen på CHILD komponenten");
     }
