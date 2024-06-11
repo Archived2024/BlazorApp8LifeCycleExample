@@ -1,0 +1,29 @@
+﻿@page "/initialize-and-dispose"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<h3>InitializeAndDisposePhase</h3>
+<div>Exempeltext: @SampleText</div>
+
+@code {
+
+    public string SampleText { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        SampleText = "Ärligt lånat från äldre blazorschool";
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    public void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        JSRuntime.InvokeVoidAsync("alert", "Nu navigerar vi");
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+}
