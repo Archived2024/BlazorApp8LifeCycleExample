@@ -1,0 +1,22 @@
+﻿@inject IJSRuntime JSRuntime
+
+
+<h3>Här Startar child/sub komponenten 
+</h3>
+<p > Komponentens Parameter: @ComponentParameter     </p>
+<h3>
+    Här Avslutas child/sub komponenten
+</h3>
+
+
+@code {
+    [Parameter]
+    public string ComponentParameter { get; set; } = "";
+
+    protected override void OnParameterSet()
+    {
+        JSRuntime.InvokeVoidAsync("alert", "Nu triggas ParameterSet fasen på CHILD komponenten");
+    }
+
+
+}
