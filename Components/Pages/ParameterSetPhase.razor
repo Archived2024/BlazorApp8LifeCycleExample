@@ -1,9 +1,19 @@
-﻿@page "/parameter-set"
+﻿@page "/parameters-set"
 @using BlazorApp8LifeCycleExample.SubComponents
 @inject IJSRuntime JSRuntime
 
 
 <h3>ParameterSetPhase</h3>
+
+<div>
+    <SimpleChildComponent ComponentParameter="@Parameter" />
+    <button @onclick="()=>Parameter = RandomString()">Uppdatera Componentparameter</button>
+</div>
+
+<div>
+   <div> Url Parameter: @UrlParameter  </div>
+    <a href="/parameters-set?UrlParameter=@RandomString()">Uppdatera UrlParameter</a>
+</div>
 
 @code {
     public string Parameter { get; set; } = "";   
