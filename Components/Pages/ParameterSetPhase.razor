@@ -1,0 +1,28 @@
+﻿@page "/parameter-set"
+@using BlazorApp8LifeCycleExample.SubComponents
+@inject IJSRuntime JSRuntime
+
+
+<h3>ParameterSetPhase</h3>
+
+@code {
+    public string Parameter { get; set; } = "";   
+    private Random _random = new Random();
+
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? UrlParameter { get; set; } = "";
+
+
+    protected override void OnParametersSet() => JSRuntime.InvokeVoidAsync("alert", "Nu triggas ParameterSet fasen på PARENT komponenten");
+    
+    private string RandomString() {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return new string(Enumerable.Repeat(chars, 5)
+            .Select(s => s[_random.Next(s.Length)]).ToArray());
+    
+    }
+
+
+}
